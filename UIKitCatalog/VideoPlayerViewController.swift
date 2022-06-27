@@ -62,12 +62,12 @@ class VideoPlayerViewController: UIViewController, AVPlayerViewControllerDelegat
     
     func sampleExternalMetaData() -> [AVMetadataItem] {
         let titleItem = AVMutableMetadataItem()
-        titleItem.identifier = AVMetadataCommonIdentifierTitle
+        titleItem.identifier = AVMetadataIdentifier.commonIdentifierTitle
         titleItem.value = "Apple Special Event, September 2015" as NSString
         titleItem.extendedLanguageTag = "und"
         
         let descriptionItem = AVMutableMetadataItem()
-        descriptionItem.identifier = AVMetadataCommonIdentifierDescription
+        descriptionItem.identifier = AVMetadataIdentifier.commonIdentifierDescription
         descriptionItem.value = "Check out iPhone 6s and iPhone 6s Plus, learn about the powerful iPad Pro, take a look at the new features and bands for Apple Watch, and see the premiere of the all-new Apple TV." as NSString
         descriptionItem.extendedLanguageTag = "und"
         
@@ -102,7 +102,7 @@ class VideoPlayerViewController: UIViewController, AVPlayerViewControllerDelegat
     func timedMetaDataGroupWithTitle(_ title: String, startTime: TimeInterval, endTime: TimeInterval) -> AVTimedMetadataGroup {
         // Create an `AVMetadataItem` for the title.
         let titleItem = AVMutableMetadataItem()
-        titleItem.identifier = AVMetadataCommonIdentifierTitle
+        titleItem.identifier = AVMetadataIdentifier.commonIdentifierTitle
         titleItem.value = title as NSString
         titleItem.extendedLanguageTag = "und"
         
@@ -113,16 +113,16 @@ class VideoPlayerViewController: UIViewController, AVPlayerViewControllerDelegat
     }
     
     func timeRange(from startTime: TimeInterval, to endTime: TimeInterval) -> CMTimeRange {
-        let cmStartTime = CMTimeMakeWithSeconds(Float64(startTime), 100)
-        let cmEndTime = CMTimeMakeWithSeconds(Float64(endTime), 100)
-        let timeRange = CMTimeRangeFromTimeToTime(cmStartTime, cmEndTime)
+        let cmStartTime = CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 100)
+        let cmEndTime = CMTimeMakeWithSeconds(Float64(endTime), preferredTimescale: 100)
+        let timeRange = CMTimeRangeFromTimeToTime(start: cmStartTime, end: cmEndTime)
         
         return timeRange
     }
     
     func timeRange(withStartTime startTime: TimeInterval, duration: TimeInterval) -> CMTimeRange {
-        let cmStartTime = CMTimeMakeWithSeconds(Float64(startTime), 100)
-        let cmDuration = CMTimeMakeWithSeconds(Float64(duration), 100)
+        let cmStartTime = CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 100)
+        let cmDuration = CMTimeMakeWithSeconds(Float64(duration), preferredTimescale: 100)
         let timeRange = CMTimeRange(start: cmStartTime, duration: cmDuration)
         
         return timeRange

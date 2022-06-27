@@ -63,7 +63,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource {
     
     private func indexOfDataItem(forViewController viewController: UIViewController) -> Int {
         guard let viewController = viewController as? DataItemViewController else { fatalError("Unexpected view controller type in page view controller.") }
-        guard let viewControllerIndex = dataItems.index(of: viewController.dataItem) else { fatalError("View controller's data item not found.") }
+        guard let viewControllerIndex = dataItems.firstIndex(of: viewController.dataItem) else { fatalError("View controller's data item not found.") }
         
         return viewControllerIndex
     }

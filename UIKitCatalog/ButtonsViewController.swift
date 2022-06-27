@@ -44,17 +44,17 @@ class ButtonsViewController: UIViewController {
         let buttonTitle = NSLocalizedString("Button", comment: "")
         
         // Set the button's title for normal state.
-        let normalTitleAttributes: [String : Any] = [
-            NSForegroundColorAttributeName: UIColor.blue,
-            NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue
+        let normalTitleAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor: UIColor.blue,
+            .strikethroughStyle: NSUnderlineStyle.single.rawValue
         ]
         let normalAttributedTitle = NSAttributedString(string: buttonTitle, attributes: normalTitleAttributes)
-        attributedTextButton.setAttributedTitle(normalAttributedTitle, for: UIControlState())
+        attributedTextButton.setAttributedTitle(normalAttributedTitle, for: UIControl.State())
         
         // Set the button's title for highlighted state.
-        let highlightedTitleAttributes: [String : Any] = [
-            NSForegroundColorAttributeName: UIColor.green,
-            NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleThick.rawValue
+        let highlightedTitleAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor: UIColor.green,
+            .strikethroughStyle: NSUnderlineStyle.thick.rawValue
         ]
         let highlightedAttributedTitle = NSAttributedString(string: buttonTitle, attributes: highlightedTitleAttributes)
         attributedTextButton.setAttributedTitle(highlightedAttributedTitle, for: .highlighted)

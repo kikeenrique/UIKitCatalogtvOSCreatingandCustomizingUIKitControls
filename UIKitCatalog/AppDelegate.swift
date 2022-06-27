@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Add a search view controller to the root `UITabBarController`.
         if let tabController = window?.rootViewController as? UITabBarController {
             tabController.viewControllers?.append(packagedSearchController())
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         to open the associated URL.
     */
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print("Application launched with URL: \(url)")
         return true
     }
