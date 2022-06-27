@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12085" systemVersion="16E138" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="gEK-Fg-Ggn">
-    <device id="appleTV" orientation="landscape">
-        <adaptation id="light"/>
-    </device>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="21179.7" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="gEK-Fg-Ggn">
+    <device id="appleTV" appearance="light"/>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12059"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21169.4"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -246,7 +244,7 @@
         <!--Controls-->
         <scene sceneID="YBT-aK-4od">
             <objects>
-                <splitViewController id="Ba5-fR-avr" customClass="MenuSplitViewController" customModule="UIKitCatalog" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController allowDoubleColumnStyle="YES" id="Ba5-fR-avr" customClass="MenuSplitViewController" customModule="UIKitCatalog" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Controls" id="Su0-Nn-uId"/>
                     <connections>
                         <segue destination="gJ6-Qx-Zud" kind="relationship" relationship="masterViewController" id="y4n-ka-OW6"/>
@@ -439,7 +437,7 @@
         <!--View Controllers-->
         <scene sceneID="hwK-ky-gpf">
             <objects>
-                <splitViewController id="VNF-IG-Dku" customClass="MenuSplitViewController" customModule="UIKitCatalog" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController allowDoubleColumnStyle="YES" id="VNF-IG-Dku" customClass="MenuSplitViewController" customModule="UIKitCatalog" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="View Controllers" id="93h-O2-Hda"/>
                     <connections>
                         <segue destination="MH8-Yg-6i8" kind="relationship" relationship="masterViewController" id="nZj-5u-eeq"/>
@@ -542,7 +540,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Ejs-Kb-afq">
                                 <rect key="frame" x="552" y="165" width="817" height="232"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCJ-EE-jYc">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCJ-EE-jYc">
                                         <rect key="frame" x="0.0" y="0.0" width="817" height="86"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="Show Focus Guides Example"/>
@@ -550,7 +548,7 @@
                                             <segue destination="Gb5-La-gdt" kind="presentation" id="Fdf-54-0dw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYB-eE-UKn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYB-eE-UKn">
                                         <rect key="frame" x="0.0" y="146" width="817" height="86"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="Show Embedded Collection Views Example"/>
@@ -623,7 +621,7 @@
         <!--Text Entry-->
         <scene sceneID="AUA-up-QOf">
             <objects>
-                <splitViewController id="dKU-UQ-acl" customClass="MenuSplitViewController" customModule="UIKitCatalog" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController allowDoubleColumnStyle="YES" id="dKU-UQ-acl" customClass="MenuSplitViewController" customModule="UIKitCatalog" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Text Entry" id="8kB-pR-8Zq"/>
                     <connections>
                         <segue destination="Z3H-A4-vqy" kind="relationship" relationship="masterViewController" id="9gi-hF-auO"/>
@@ -634,9 +632,4 @@
             <point key="canvasLocation" x="6492" y="2721"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <nil key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>
