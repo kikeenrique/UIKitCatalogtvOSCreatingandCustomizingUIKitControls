@@ -59,7 +59,8 @@ extension ContentProvider {
         let contentItem = TVTopShelfSectionedItem(identifier: contentIdentifier)
 
         contentItem.title = dataItem.title
-        contentItem.playAction = TVTopShelfAction(url: dataItem.displayURL)
+//        contentItem.playAction = TVTopShelfAction(url: dataItem.displayURL)
+        contentItem.displayAction = TVTopShelfAction(url: dataItem.displayURL)
         contentItem.setImageURL(dataItem.imageURL,
                                 for: [.screenScale1x])
         if dataItem.largeImageURL != nil {
