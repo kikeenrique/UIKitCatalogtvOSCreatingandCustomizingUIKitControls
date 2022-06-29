@@ -47,6 +47,14 @@ struct DataItem: Equatable {
         
         return imageURL
     }
+
+    var largeImageURL: URL? {
+        let mainBundle = Bundle.main
+        guard let imageURL = mainBundle.url(forResource: largeImageName, withExtension: nil) else { return nil }
+
+        return imageURL
+    }
+
 }
 
 // MARK: Equatable

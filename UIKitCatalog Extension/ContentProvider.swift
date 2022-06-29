@@ -1,108 +1,74 @@
 /*
     Copyright (C) 2017 Apple Inc. All Rights Reserved.
     See LICENSE.txt for this sample’s licensing information
-    
+
     Abstract:
     A class that conforms to the `TVTopShelfProvider` protocol. The Top Shelf extension uses this class to query for items to show.
 */
 
 import TVServices
 
-class ServiceProvider: NSObject, TVTopShelfProvider {
-    // MARK: TVTopShelfProvider
-    
-    /**
-        The style of Top Shelf items to show.
-        Modify this property to view different styles.
-    */
-    let topShelfStyle: TVTopShelfContentStyle = .sectioned
-    
-    var topShelfItems: [TVContentItem] {
-        switch topShelfStyle {
-            case .inset:
-                return insetTopShelfItems
-            
-            case .sectioned:
-                return sectionedTopShelfItems
-        }
+class ContentProvider: TVTopShelfContentProvider {
+    override func loadTopShelfContent() async -> TVTopShelfContent? {
+        let sections = self.sectionedContent()
+        let content = TVTopShelfSectionedContent(sections: sections)
+        return content
     }
-    
+}
+
+extension ContentProvider {
     // MARK: Convenience
-    
-    /// An array of `TVContentItem`s to show when `topShelfStyle` returns `.Inset`.
-    fileprivate var insetTopShelfItems: [TVContentItem] {
-        // Get an array of `DataItem`s to show on the Top Shelf.
-        let itemsToDisplay = DataItem.sampleItemsForInsetTopShelfItems
-        
-        // Map the array of `DataItem`s to an array of `TVContentItem`s.
-        let contentItems: [TVContentItem] = itemsToDisplay.map { dataItem in
-            return contentItemWithDataItem(dataItem, imageShape: .extraWide)
-        }
-    
-        return contentItems
-    }
-    
+
     /**
-        An array of `TVContentItem`s to show when `topShelfStyle` returns `.Sectioned`.
-    
-        Each `TVContentItem` in the returned array represents a section of
-        `TVContentItem`s on the Top Shelf. e.g.
-    
-            - TVContentItem, "Iceland"
-                - TVContentItem, "Iceland one"
+        An array of `TVTopShelfItem`s to show.
+
+        Each `TVTopShelfItem` in the returned array represents a section of
+        `TVTopShelfItem`s on the Top Shelf. e.g.
+
+            - TVTopShelfItem, "Iceland"
+                - TVTopShelfItem, "Iceland one"
                 - TVContentItem, "Iceland two"
-            
-            - TVContentItem, "Lola"
-                - TVContentItem, "Lola one"
-                - TVContentItem, "Lola two"
+
+            - TVTopShelfItem, "Lola"
+                - TVTopShelfItem, "Lola one"
+                - TVTopShelfItem, "Lola two"
     */
-    fileprivate var sectionedTopShelfItems: [TVContentItem] {
+    private func sectionedContent() -> [TVTopShelfItemCollection<TVTopShelfSectionedItem>] {
         // Get an array of `DataItem` arrays to show on the Top Shelf.
         let groupedItemsToDisplay = DataItem.sampleItemsForSectionedTopShelfItems
-        
-        /*
-            Map the array of `DataItem` arrays to an array of `TVContentItem`s.
-            Each `TVContentItem` will represent a section of `TVContentItem`s on
-            the Top Shelf.
-        */
-        let sectionContentItems: [TVContentItem] = groupedItemsToDisplay.map { dataItems in
-            // Determine the title of the `DataItem.Group` that the array of `DataItem`s belong to.
-            let sectionTitle = dataItems.first!.group.rawValue
-            
-            /*
-                Create a `TVContentItem` that will represent a section of `TVContentItem`s
-                on the Top Shelf.
-            */
-            guard let sectionIdentifier = TVContentIdentifier(identifier: sectionTitle, container: nil) else { fatalError("Error creating content identifier for section item.") }
-            guard let sectionItem = TVContentItem(contentIdentifier: sectionIdentifier) else { fatalError("Error creating section content item.") }
-
-            sectionItem.title = sectionTitle
-
+        let sections: [TVTopShelfItemCollection<TVTopShelfSectionedItem>] = groupedItemsToDisplay.map { dataItems in
             /*
                 Map the array of `DataItem`s to an array of `TVContentItem`s and
                 assign it to the `TVContentItem` that represents the section of
                 Top Shelf items.
             */
-            sectionItem.topShelfItems = dataItems.map { dataItem in
+            let items = dataItems.map { dataItem in
                 return contentItemWithDataItem(dataItem, imageShape: .square)
             }
-            
-            return sectionItem
+            let section = TVTopShelfItemCollection(items: items)
+            let sectionTitle = dataItems.first!.group.rawValue
+            section.title = sectionTitle
+            return section
         }
-        
-        return sectionContentItems
+
+        return sections
     }
 
-    /// Returns a `TVContentItem` for a `DataItem`.
-    fileprivate func contentItemWithDataItem(_ dataItem: DataItem, imageShape: TVContentItemImageShape) -> TVContentItem {
-        let contentIdentifier = TVContentIdentifier(identifier: dataItem.identifier, container: nil)
-        let contentItem = TVContentItem(contentIdentifier: contentIdentifier)
-        
+    private func contentItemWithDataItem(_ dataItem: DataItem, imageShape: TVTopShelfSectionedItem.ImageShape) -> TVTopShelfSectionedItem {
+        let contentIdentifier = dataItem.identifier
+        let contentItem = TVTopShelfSectionedItem(identifier: contentIdentifier)
+
         contentItem.title = dataItem.title
-        contentItem.displayURL = dataItem.displayURL
-        contentItem.imageURL = dataItem.imageURL
+        contentItem.playAction = TVTopShelfAction(url: dataItem.displayURL)
+        contentItem.setImageURL(dataItem.imageURL,
+                                for: [.screenScale1x])
+        if dataItem.largeImageURL != nil {
+            contentItem.setImageURL(dataItem.largeImageURL,
+                                    for: [.screenScale2x])
+        }
         contentItem.imageShape = imageShape
-        
+
         return contentItem
     }
+
 }
