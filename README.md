@@ -2,15 +2,20 @@
 
 Demonstrates how to use many views and controls in the UIKit framework on tvOS. Refer to this sample if you are looking for specific controls or views that are provided by the system.
 
+## About
+
+This is a derived work from example code provided by Apple (https://developer.apple.com/library/archive/samplecode/UICatalogFortvOS/Introduction/Intro.html)
+It has been modified to work on latest tvOS 16 SDK.
+
 ## Requirements
 
 ### Build
 
-Xcode 8.0 and tvOS 10.0 SDK or later
+Xcode 14.0 and tvOS 15.0 SDK or later
 
 ### Runtime
 
-tvOS 10.0 or later
+tvOS 15.0 or later
 
 ## Using the sample
 
@@ -54,6 +59,7 @@ Focus is an important concept to tvOS and the "Focus" tab demonstrates a few com
 
 ### Top Shelf items
 
-The sample contains a TV Services extension. This extension contains a class, ServiceProvider, that implements the TVTopShelfProvider protocol to provide TVContentItems to show on the Top Shelf.
+The sample contains a TV Services extension. 
+This extension contains a class, ContentProvider, that implements the TVTopShelfContentProvider protocol to provide TVTopShelfItem to show on the Top Shelf.
 
-Copyright (C) 2016 Apple Inc. All rights reserved.
+Copyright (C) 2016-2022 Apple Inc. All rights reserved.
